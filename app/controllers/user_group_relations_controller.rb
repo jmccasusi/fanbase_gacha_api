@@ -1,0 +1,3 @@
+class UserGroupRelationsController < ApplicationController
+
+end
