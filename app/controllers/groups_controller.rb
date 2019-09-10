@@ -10,7 +10,18 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
-    render json: @group
+    render json: @group.to_json(
+      include: [
+        {:owner => { :only => [:username, :id, :online_status, :last_activity_at] }},
+        {:users => { :only => [:username, :id, :online_status, :last_activity_at] }}, 
+        {:rooms => { :only => [:name, :id, :group_id], 
+          include: {:messages => { :only => [ :id, :content, :created_at, :room_id], 
+            include: [{:user => { :only => [:username, :id, :online_status, :last_activity_at] }
+            }]
+          }}
+        }}
+      ], :only => [ :name, :is_private, :roll_interval, :claim_interval ]
+    )
   end
 
   # POST /groups
