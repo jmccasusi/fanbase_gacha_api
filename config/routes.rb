@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :group_category_relations
+  resources :deck_category_relations
+  resources :categories
+  resources :decks do
+    resources :cards
+  end 
   resources :groups do
     # resources :rooms do
     #   resources :messages

@@ -13,12 +13,22 @@ class GroupsController < ApplicationController
     render json: @group.to_json(
       include: [
         {:owner => { :only => [:username, :id, :online_status, :last_activity_at] }},
-        {:users => { :only => [:username, :id, :online_status, :last_activity_at] }}, 
+        {:users => { :only => [:username, :id, :online_status, :last_activity_at],
+          include: {:cards => {
+            include: {:deck => { :only => [:name] }}
+            }
+          }
+        }}, 
         {:rooms => { :only => [:name, :id, :group_id], 
           include: {:messages => { :only => [ :id, :content, :created_at, :room_id], 
-            include: [{:user => { :only => [:username, :id, :online_status, :last_activity_at] }
+            include: [{:user => { :only => [:username, :id] }
             }]
           }}
+        }},
+        {:categories => {
+            include: {:decks => {
+              include: :cards
+            }}
         }}
       ], :only => [ :name, :is_private, :roll_interval, :claim_interval ]
     )

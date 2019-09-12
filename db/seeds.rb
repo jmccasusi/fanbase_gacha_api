@@ -112,3 +112,99 @@ Message.create([
     }
 ])
 
+Deck.create([
+    {
+        name: 'Harry Potter'
+    },
+    {
+        name: 'Naruto'
+    }
+])
+
+Category.create([
+    {
+        name: 'Western Series'
+    },
+    {
+        name: 'Anime'
+    },
+    {
+        name: 'Live Action'
+    }
+])
+
+DeckCategoryRelation.create([
+    {
+        deck_id: 1,
+        category_id: 1
+    },
+    {
+        deck_id: 1,
+        category_id: 3
+    },
+    {
+        deck_id: 2,
+        category_id: 2
+    }
+])
+
+Card.create([
+    {
+        name: "Harry Potter",
+        likes: 0,
+        deck_id: 1
+    },
+    {
+        name: "Hermione Granger",
+        likes: 0,
+        deck_id: 1
+    },
+    {
+        name: "Ron Weasley",
+        likes: 0,
+        deck_id: 1
+    },
+    {
+        name: "Naruto Uzumaki",
+        likes: 0,
+        deck_id: 2
+    },
+    {
+        name: "Sasuke Uchiha",
+        likes: 0,
+        deck_id: 2
+    },
+    {
+        name: "Hinata Hyuga",
+        likes: 0,
+        deck_id: 2
+    }
+])
+
+GroupCategoryRelation.create([
+    {
+        group_id: 1,
+        category_id: 1
+    },
+    {
+        group_id: 1,
+        category_id: 2
+    },
+    {
+        group_id: 2,
+        category_id: 3
+    }
+])
+
+UserCardRelation.create([
+    {
+        user_id: 1,
+        card_id: 3,
+        group_id: 1
+    },
+    {
+        user_id: 2,
+        card_id: 4,
+        group_id: 1
+    }
+])
