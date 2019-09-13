@@ -1,11 +1,17 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user
   before_action :set_group, only: [:show, :update, :destroy]
+  # before_action :set_group, only: [:show, :update, :destroy]
 
   # GET /groups
   def index
     @groups = Group.all
 
     render json: @groups.to_json(include: [:users, :rooms])
+  end
+
+  def authenticate_user
+
   end
 
   # GET /groups/1

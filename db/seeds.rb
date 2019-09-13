@@ -10,16 +10,19 @@ User.create([
     {
         username: 'sampleuser1',
         password: 'password',
+        password_confirmation: 'password',
         email_address: 'email1@address'
     }, 
     {
         username: 'sampleuser2',
         password: 'password',
+        password_confirmation: 'password',
         email_address: 'email2@address'
     }, 
     {
         username: 'sampleuser3',
         password: 'password',
+        password_confirmation: 'password',
         email_address: 'email3@address'
     }
 ])
@@ -97,6 +100,21 @@ Room.create([
 Message.create([
     {
         content: "Hello! This is my first message!",
+        room_id: 1,
+        user_id: 1
+    },
+    {
+        content: "Second message!",
+        room_id: 1,
+        user_id: 1
+    },
+    {
+        content: "3rd message!",
+        room_id: 1,
+        user_id: 1
+    },
+    {
+        content: "4th!",
         room_id: 1,
         user_id: 1
     },
@@ -208,3 +226,10 @@ UserCardRelation.create([
         group_id: 1
     }
 ])
+
+user = User.new
+user.username = 'bananas'
+user.email_address = 'user@bananas.com'
+user.password = 'bananaBro'
+user.password_confirmation = 'bananaBro'
+user.save

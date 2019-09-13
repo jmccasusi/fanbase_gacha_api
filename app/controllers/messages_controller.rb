@@ -3,8 +3,8 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    # @messages = Message.all
-    @messages = Room.find(params[:room_id]).messages
+    @messages = Message.all
+    # @messages = Room.find(params[:room_id]).messages
 
     render json: @messages
   end
@@ -17,9 +17,11 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @message = Message.new(message_params)
+    @message.room_id = params[:room_id]
+    @message.user_id = 1
 
     if @message.save
-      render json: @message, status: :created, location: @message
+      render json: @message, status: :created
     else
       render json: @message.errors, status: :unprocessable_entity
     end
