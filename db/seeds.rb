@@ -10,20 +10,17 @@ User.create([
     {
         username: 'sampleuser1',
         password: 'password',
-        password_confirmation: 'password',
-        email_address: 'email1@address'
+        email: 'email1@address'
     }, 
     {
         username: 'sampleuser2',
         password: 'password',
-        password_confirmation: 'password',
-        email_address: 'email2@address'
+        email: 'email2@address'
     }, 
     {
         username: 'sampleuser3',
         password: 'password',
-        password_confirmation: 'password',
-        email_address: 'email3@address'
+        email: 'email3@address'
     }
 ])
 
@@ -229,7 +226,7 @@ UserCardRelation.create([
 
 user = User.new
 user.username = 'bananas'
-user.email_address = 'user@bananas.com'
+user.email = 'user@bananas.com'
 user.password = 'bananaBro'
 user.password_confirmation = 'bananaBro'
 user.save
