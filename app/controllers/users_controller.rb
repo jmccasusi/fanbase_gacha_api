@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
     @users = User.all
+    jwt = request.headers['Authorization'].split(' ').last
+    puts token
+    decoded_token = JWT.decode jwt, Rails.application.secrets.secret_key_base, true, { :algorithm => 'HS256' }
+    current_user = User.find((decoded_token[0])['sub'])
+    puts current_user
 
-    render json: @users.to_json(include: :groups)
+    render json: current_user.to_json(include: :groups)
   end
 
   # GET /users/1
