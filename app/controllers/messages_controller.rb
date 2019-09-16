@@ -18,7 +18,6 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.room_id = params[:room_id]
-    @message.user_id = 1
 
     if @message.save
       render json: @message, status: :created
@@ -49,6 +48,6 @@ class MessagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def message_params
-      params.require(:message).permit(:content)
+      params.require(:message).permit(:content, :user_id)
     end
 end
