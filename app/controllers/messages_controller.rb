@@ -4,7 +4,10 @@ class MessagesController < ApplicationController
   # GET /messages
   def index
     @messages = Message.all
-    # @messages = Room.find(params[:room_id]).messages
+    @messages = Room.find(params[:room_id]).messages
+
+    # ActionCable.server.broadcast 'messages',
+    #     {messages: @messages}
 
     render json: @messages
   end
@@ -15,16 +18,38 @@ class MessagesController < ApplicationController
   end
 
   # POST /messages
-  def create
-    @message = Message.new(message_params)
-    @message.room_id = params[:room_id]
+  # def create
+  #   @message = Message.new(message_params)
+  #   @message.room_id = params[:room_id]
 
-    if @message.save
+  #   if @message.save
+  #     render json: @message, status: :created
+  #   else
+  #     render json: @message.errors, status: :unprocessable_entity
+  #   end
+  # end
+
+  # def send
+  #   ActionCable.server.broadcast 'messages',
+  #       {id: message.id}
+  # end
+
+  def create
+    message = Message.new(message_params)
+    message.room_id = params[:room_id]
+
+    @messages = Message.all
+    @messages = Room.find(params[:room_id]).messages
+
+    if message.save
+      ActionCable.server.broadcast 'messages#create', message.to_json(
+        include: {:user => { :only => [:username, :id] }})
       render json: @message, status: :created
     else
-      render json: @message.errors, status: :unprocessable_entity
+          render json: @message.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /messages/1
   def update
