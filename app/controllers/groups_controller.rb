@@ -33,7 +33,10 @@ class GroupsController < ApplicationController
         }},
         {:categories => {
             include: {:decks => {
-              include: :cards
+              include: {:cards => {
+                include: {:deck => { :only => [:name] }}
+                }
+              }
             }}
         }}
       ], :only => [ :name, :is_private, :roll_interval, :claim_interval ]
