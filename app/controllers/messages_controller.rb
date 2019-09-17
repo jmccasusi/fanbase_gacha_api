@@ -9,12 +9,14 @@ class MessagesController < ApplicationController
     # ActionCable.server.broadcast 'messages',
     #     {messages: @messages}
 
-    render json: @messages
+    render json: @messages.to_json(
+      include: {:user => { :only => [:username, :id] }})
   end
 
   # GET /messages/1
   def show
-    render json: @message
+    render json: @message.to_json(
+      include: {:user => { :only => [:username, :id] }})
   end
 
   # POST /messages
