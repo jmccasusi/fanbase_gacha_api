@@ -11,7 +11,18 @@ class UsersController < ApplicationController
     current_user = User.find((decoded_token[0])['sub'])
     puts current_user
 
-    render json: current_user.to_json(include: :groups)
+    render json: @users
+  end
+
+  def login
+    # @users = User.all
+    # jwt = request.headers['Authorization'].split(' ').last
+    # puts token
+    # decoded_token = JWT.decode jwt, Rails.application.secrets.secret_key_base, true, { :algorithm => 'HS256' }
+    # current_user = User.find((decoded_token[0])['sub'])
+    # puts current_user
+
+    # render json: current_user.to_json(include: :groups)
   end
 
   # GET /users/1

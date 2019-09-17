@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
+  # get 'login' => 'user#login'
   post 'user_token' => 'user_token#create'
   resources :group_category_relations
   resources :deck_category_relations
