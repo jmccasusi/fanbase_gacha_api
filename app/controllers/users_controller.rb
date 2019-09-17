@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @users = User.all
     jwt = request.headers['Authorization'].split(' ').last
     puts token
-    decoded_token = JWT.decode jwt, Rails.application.secrets.secret_key_base, true, { :algorithm => 'HS256' }
+    decoded_token = JWT.decode jwt, Rails.application.credentials.secret_key_base, true, { :algorithm => 'HS256' }
     current_user = User.find((decoded_token[0])['sub'])
     puts current_user
 
