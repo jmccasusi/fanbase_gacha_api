@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token, raise: false
   before_action :authenticate_user, except: [:create]
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
         }
       ]
       )
-      render json: @user, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -72,6 +73,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :username, :password, :password_confirmation)
+      params.permit(:email, :username, :password)
     end
 end
