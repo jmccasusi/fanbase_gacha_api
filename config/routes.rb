@@ -3,9 +3,13 @@ Rails.application.routes.draw do
 
   # get 'login' => 'user#login'
   post 'user_token' => 'user_token#create'
+
+  post 'claim' => 'user_card_relation#claim'
+
   resources :group_category_relations
   resources :deck_category_relations
   resources :categories
+  resources :user_card_relations, :only =>  [:index]
   resources :decks do
     resources :cards
   end 
