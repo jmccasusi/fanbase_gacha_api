@@ -485,17 +485,17 @@ GroupCategoryRelation.create([
 UserCardRelation.create([
     {
         user_id: 1,
-        groud_id: 1,
+        group_id: 1,
         card_id: 7
     },
     {
         user_id: 1,
-        groud_id: 1,
+        group_id: 1,
         card_id: 8
-    }
+    },
     {
         user_id: 2,
-        groud_id: 1,
+        group_id: 1,
         card_id: 8
     }
 ])
