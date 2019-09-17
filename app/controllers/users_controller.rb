@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     current_user = User.find((decoded_token[0])['sub'])
     puts current_user
 
-    render json: @users
+    render json: current_user.to_json(include: :groups)
   end
 
   def login
