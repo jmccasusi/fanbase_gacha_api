@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   # get 'login' => 'user#login'
   post 'user_token' => 'user_token#create'
 
-  post 'claim' => 'user_card_relation#claim'
-
+  post 'claim' => 'user_card_relations#claim'
+  post 'group_cards' => 'user_card_relations#group'
+  
   resources :group_category_relations
   resources :deck_category_relations
   resources :categories

@@ -8,6 +8,12 @@ class UserCardRelationsController < ApplicationController
     render json: @claims
   end
 
+  def group
+    group_id = params[:group_id]
+    @group_cards = UserCardRelation.where(group_id: group_id);
+
+    render json: @group_cards.to_json(include: [{:user => { :only => [:id, :username] }}, :card])
+  end
 
   def claim
     user_id = params[:user_id];
