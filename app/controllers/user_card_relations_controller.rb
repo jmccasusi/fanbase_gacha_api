@@ -20,12 +20,16 @@ class UserCardRelationsController < ApplicationController
     card_id = params[:card_id];
     group_id = params[:group_id];
 
-    UserCardRelation.create(
-        {
-            user_id: user_id,
-            card_id: card_id,
-            group_id: group_id
-        }
-    )
+    if(!UserCardRelation.where(group_id: group_id, card_id: card_id).exists?){
+        UserCardRelation.create(
+            {
+                user_id: user_id,
+                card_id: card_id,
+                group_id: group_id
+            }
+        )
+    } else {
+        p 'ERROR! CARD ALREADY OWNED'
+    }
   end
 end
